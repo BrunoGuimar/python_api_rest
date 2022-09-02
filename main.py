@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 data_db = dict()
 
+
 @app.route('/products')
 def get_products():
     return data_db, 200
@@ -35,6 +36,7 @@ def update_product(product_id: int):
         price = request.json['price']
         product['name'] = name
         product['price'] = price
+        
         return product, 202
     else:
         return {'Message': "Product not found"}, 404
