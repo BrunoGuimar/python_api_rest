@@ -19,14 +19,17 @@ def add_product():
         new_id = ids[-1] + 1
     else:
         new_id = 1
-    data_db[new_id] = {
-        'name': name, 
-        'price': price,
-        'dated_at': date.today(),
-        'id': new_id,
-        'type': 'bought',
-    }
-    return data_db, 201
+    try:
+        data_db[new_id] = {
+            'name': name, 
+            'price': price,
+            'dated_at': date.today(),
+            'id': new_id,
+            'type': 'bought',
+        }
+        return data_db, 201
+    except KeyError as error:
+        print({'Message': error})
 
 @app.route('/products/<int:product_id>', methods=['PUT'])
 def update_product(product_id: int):
